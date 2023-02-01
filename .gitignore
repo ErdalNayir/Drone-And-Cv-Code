@@ -1,0 +1,4 @@
+# directories which will be omitted
+dronekit-python
+venv
+yazilim1
