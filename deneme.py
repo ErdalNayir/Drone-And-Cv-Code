@@ -1,6 +1,10 @@
 from ImageProcessing.ThreadCamera import ThreadCamera
-
+import time
 
 cap = ThreadCamera(src=0).start()
 
-cap.detect_mid_and_close()
+while True:
+    cap.detect_mid_and_close()
+    time.sleep(1)
+
+

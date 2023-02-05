@@ -154,12 +154,12 @@ class Drone:
 
         for x in range(0, duration):
             self.vehicle.send_mavlink(msg)
-            print(x)
             time.sleep(1)
 
     def simple_goto(self, lat, lon):
         point1 = LocationGlobalRelative(lat, lon)
         self.vehicle.simple_goto(point1)
+
 
     def close_vehicle(self):
         self.vehicle.close()

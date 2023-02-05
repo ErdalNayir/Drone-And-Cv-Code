@@ -1,6 +1,10 @@
 import time
-# from ImageProcessing.OpenCamera import startVideo
+from ImageProcessing.ThreadCamera import ThreadCamera
 from DroneCode.Drone import Drone
+
+# thread camera is instantiated
+cap = ThreadCamera(src=0).start()
+
 
 drone = Drone()
 drone.vehicle_info()
@@ -19,18 +23,21 @@ time.sleep(1)
 # time.sleep(30)
 drone.change_mode("GUIDED")
 time.sleep(1)
-print("Birinci ileri")
-drone.change_velocity(0.5, 0, 0)
-time.sleep(10)
-print("İkinci geri")
-drone.change_velocity(-0.5, 0, 0)
-time.sleep(10)
-print("Üçüncü sağa")
-drone.change_velocity(0, 0.5, 0)
-time.sleep(10)
-print("Dördüncü sola")
-drone.change_velocity(0, -0.5, 0)
-time.sleep(10)
+while True:
+    value = cap.detect_mid_and_close()
+    print(value)
+    if value == "east":
+        drone.change_velocity(0,1,0,1)
+        time.sleep(1)
+    elif value == "west":
+        drone.change_velocity(0, -1, 0, 1)
+        time.sleep(1)
+    elif value == "center":
+        drone.change_velocity(1,0,0,1)
+        time.sleep(1)
+
+
+time.sleep(1)
 drone.change_mode("LAND")
-time.sleep(10)
+time.sleep(5)
 drone.close_vehicle()

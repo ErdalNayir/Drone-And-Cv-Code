@@ -9,10 +9,7 @@ def startVideo():
     started = 0
     cap =cv2.VideoCapture(0)
     value=True
-    i=0
     while(value):
-        i+=1
-        print(i)
         # read frame
         ret, frame = cap.read()
         frame = cv2.resize(frame,[540,540])
@@ -27,7 +24,9 @@ def startVideo():
         # Creating bounding box and center circle
         for _,cnt in enumerate(contours):
             rect = cv2.boundingRect(cnt)
-            if cv2.contourArea(cnt)>=2800 and cv2.contourArea(cnt)<=8000:
+            print((cv2.contourArea(cnt)))
+            if cv2.contourArea(cnt)>=2800:
+
                 if objectCounter==1: #that code ensures that there is only one detected object on the screen
                     x, y, w, h = rect # coordinates of bounding box
                     #coordinates of circle center

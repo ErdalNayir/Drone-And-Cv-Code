@@ -19,8 +19,8 @@ def detectColor(frame):
     # upper = np.array([hMax, sMax, vMax])
 
     # Defining lower and upper bound HSV values
-    lower = np.array([81, 90, 109])
-    upper = np.array([103, 255, 255])
+    lower = np.array([60, 99, 148])
+    upper = np.array([175, 201, 255])
 
     # Defining mask for detecting color
     mask = cv2.inRange(hsv, lower, upper)
@@ -48,3 +48,13 @@ def detectPosition(X,Y):
         return "Dogu"
     if 360< X <= 540 and 360 < Y <= 540:
         return "Guney Dogu"
+
+def detect_line_position(X):
+    if X <= 180:
+        return "west"
+    elif 360< X <= 540:
+        return "east"
+    elif 180< X <= 360:
+        return "center"
+    else:
+        return "eol"
